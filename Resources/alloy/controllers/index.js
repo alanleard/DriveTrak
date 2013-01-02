@@ -23,7 +23,13 @@ function Controller() {
         } else disconnect(e);
     }
     function disconnect(e) {
+        if (report != null) {
+            var endTime = (new Date).toLocaleString();
+            track.trip.end = endTime;
+            finalizeReport(endTime);
+        }
         $.connectBtn.title = "connect to vehicle";
+        $.status.text = "Connect to start tracking";
         if (vehicleObject != null) {
             vehicleObject.removeEventListener("drivingOperation", didReceiveDrivingOperation);
             vehicleObject.disconnect();
@@ -59,26 +65,36 @@ function Controller() {
         });
     }
     function vehicleBehaviorTrack(e) {
-        var vData = e.data;
-        settings[e.type].conversion && (vData = conversion[e.type]({
-            type: "out",
-            value: e.data
-        }));
+        var vData = e.data, settingMax = settings[e.type].max, currentMax = track[e.type].current;
+        if (settings[e.type].conversion) {
+            vData = conversion[e.type]({
+                type: "out",
+                value: e.data
+            });
+            settingMax = conversion[e.type]({
+                type: "out",
+                value: settings[e.type].max
+            });
+            currentMax = conversion[e.type]({
+                type: "out",
+                value: track[e.type].current
+            });
+        }
         if (vData > track[e.type].max || track[e.type].max == 0) {
             track[e.type].max = vData;
             e.label.text = "Max " + e.title + ": " + track[e.type].max + settings[e.type].extension;
         }
-        if (e.data > settings[e.type].max) if (!track[e.type].flag) {
+        if (vData > settingMax) if (!track[e.type].flag) {
             track[e.type].flag = !0;
             settings[e.type].notify && acs.pushNotify({
-                payload: "Drive Track Alert for " + settings.driverName + "\n\n" + e.title + " exceeded limit of " + settings[e.type].max + settings[e.type].extension
+                payload: "Drive Track Alert for " + settings.driverName + "\n\n" + e.title + " exceeded limit of " + settingMax + settings[e.type].extension
             });
         } else if (!track[e.type].current || vData > track[e.type].current) track[e.type].current = vData;
-        if (e.data < settings[e.type].max && track[e.type].flag) {
+        if (vData < settingMax && track[e.type].flag) {
             track[e.type].flag = !1;
             appendReport({
                 title: e.title + " Limit Exceeded",
-                detail: track[e.type].current + settings[e.type].extension
+                detail: currentMax + settings[e.type].extension
             });
             track[e.type].current = null;
         }
@@ -333,7 +349,6 @@ function Controller() {
         id: "connectBtn"
     }), "Button", $.__views.win);
     $.__views.win.add($.__views.connectBtn);
-    vehicleConnect ? $.__views.connectBtn.on("click", vehicleConnect) : __defers["$.__views.connectBtn!click!vehicleConnect"] = !0;
     $.__views.__alloyId1 = A$(Ti.UI.createTab({
         window: $.__views.win,
         title: "Data",
@@ -590,20 +605,20 @@ function Controller() {
             extension: "%"
         },
         vehicleSpeed: {
-            max: 75,
+            max: 105,
             notify: !0,
             extension: " mph",
             conversion: !0
         },
         accelerationX: {
-            max: 4,
+            max: 10,
             notify: !0,
             extension: " g-force",
             conversion: !0
         },
         engineSpeed: {
             max: 8000,
-            notify: !1,
+            notify: !0,
             extension: " rpm"
         },
         latitude: {
@@ -625,6 +640,7 @@ function Controller() {
         }
     };
     populateSettings();
+    $.connectBtn.addEventListener("click", vehicleConnect);
     if (Ti.App.Properties.hasProperty("UUID")) acs.userLogin({
         success: loggedIn
     }); else {
@@ -633,7 +649,6 @@ function Controller() {
             success: loggedIn
         });
     }
-    __defers["$.__views.connectBtn!click!vehicleConnect"] && $.__views.connectBtn.on("click", vehicleConnect);
     __defers["$.__views.qrcodeBtn!click!displayReference"] && $.__views.qrcodeBtn.on("click", displayReference);
     __defers["$.__views.displayBtn!click!scanCode"] && $.__views.displayBtn.on("click", scanCode);
     __defers["$.__views.driverName!change!updateSettings"] && $.__views.driverName.on("change", updateSettings);

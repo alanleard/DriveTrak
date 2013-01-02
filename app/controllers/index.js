@@ -74,13 +74,13 @@ settings = {
 		extension:"%"
 	},
 	vehicleSpeed:{
-		max:75,
+		max:105,
 		notify:true,
 		extension:" mph",
 		conversion: true
 	},
 	accelerationX:{
-		max:4,
+		max:10,
 		notify:true,
 		extension:" g-force",
 		conversion: true
@@ -88,7 +88,7 @@ settings = {
 	},
 	engineSpeed:{
 		max:8000,
-		notify:false,
+		notify:true,
 		extension:" rpm"
 	},
 	latitude:{
@@ -124,7 +124,7 @@ conversion = {
 
 //populate the settings fields
 populateSettings();
-
+$.connectBtn.addEventListener('click', vehicleConnect);
 //Check if a UUID has been assigned and login or create a login
 if(Ti.App.Properties.hasProperty('UUID')){
 	acs.userLogin({success:loggedIn});
@@ -140,7 +140,6 @@ if(Ti.App.Properties.hasProperty('UUID')){
 
 //Get a list of devices that can be connected from application
 function vehicleConnect(){
-	
 	// Search for available vehicles
 	vehicleModule.startSearchDevice(deviceSearch);
 	
@@ -150,7 +149,7 @@ function vehicleConnect(){
 
 //Search for an available device and connect
 function deviceSearch(device){
-	
+
 	// Stop vehicle search
 	vehicleModule.stopSearchDevice();
 	
@@ -198,14 +197,19 @@ function connect(e){
 	
 //Disconnect from the device and prepare to reconnect		
 function disconnect(e) {
-	
+
+	if(report != null){
+		var endTime = new Date().toLocaleString();
+		track.trip.end = endTime;
+		finalizeReport(endTime);
+	}
 	// Update button title
 	$.connectBtn.title = 'connect to vehicle';
-	
+	$.status.text = 'Connect to start tracking';
 	// Remove an event listener
 	if(vehicleObject!=null){
 		vehicleObject.removeEventListener('drivingOperation', didReceiveDrivingOperation );
-
+		
 		// Disconnect from the device
 		vehicleObject.disconnect();
 		
@@ -235,10 +239,13 @@ function didReceiveVehicleBehavior(e)
 //Check rules then report & notify accordingly
 function vehicleBehaviorTrack(e){
 	var vData = e.data;
-	
+	var settingMax = settings[e.type].max;
+	var currentMax = track[e.type].current;
 	//If there is a conversion necessary, do it
 	if(settings[e.type].conversion){
 		vData = conversion[e.type]({type:"out",value:e.data});
+		settingMax = conversion[e.type]({type:"out", value: settings[e.type].max});
+		currentMax = conversion[e.type]({type:"out", value: track[e.type].current});
 	}
 	
 	//If the data is greater then the current max, record it
@@ -248,12 +255,12 @@ function vehicleBehaviorTrack(e){
 	}
 	
 	//If the data is greater then the current user setting limit, notify & report
-	if(e.data>settings[e.type].max){
+	if(vData>settingMax){
 
 		if(!track[e.type].flag){
 			track[e.type].flag = true;
 			if(settings[e.type].notify){
-				acs.pushNotify({payload:"Drive Track Alert for "+settings.driverName+"\n\n"+e.title+" exceeded limit of "+settings[e.type].max+settings[e.type].extension});
+				acs.pushNotify({payload:"Drive Track Alert for "+settings.driverName+"\n\n"+e.title+" exceeded limit of "+settingMax+settings[e.type].extension});
 			}
 			
 		} else {
@@ -265,10 +272,10 @@ function vehicleBehaviorTrack(e){
 	}
 	
 	//If the data is below the limit, turn the tracking flag off and append the report of the incident
-	if(e.data<settings[e.type].max){
+	if(vData<settingMax){
 		if(track[e.type].flag){
 			track[e.type].flag = false;
-			appendReport({title:e.title+" Limit Exceeded", detail:track[e.type].current+settings[e.type].extension});
+			appendReport({title:e.title+" Limit Exceeded", detail:currentMax+settings[e.type].extension});
 			track[e.type].current = null;
 		} 
 		

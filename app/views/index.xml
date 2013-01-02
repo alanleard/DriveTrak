@@ -7,7 +7,7 @@
 				<Label id="maxSpeed"></Label>
 				<Label id="maxRpm"></Label>
 				<Label id="maxAcceleration"></Label>
-				<Button id="connectBtn" onClick="vehicleConnect">connect to vehicle</Button>
+				<Button id="connectBtn">connect to vehicle</Button>
 			</Window>
 		</Tab>
 		<Tab title="Connect" icon="connectIcon.png">
