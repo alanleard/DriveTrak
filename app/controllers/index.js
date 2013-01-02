@@ -1,13 +1,27 @@
 /*INSTRUCTIONS TO USE THIS APP
  *
+ * BASIC INFO TRACKING
  * 1. Start your Denso Vehicle simulator and click 'listen'
- * 2. Click the connect butto
-**/
-
-
-
-
-
+ * 2. Click the 'connect to vehicle' button
+ * 3. Go to the Denso simulator and change gears out of 'Park'
+ * 4. Once the car is out of 'Park' tracking will start
+ * 5. Tracking will end when the car is put back into 'Park'
+ * 6. A report will be generated and maximums will be displayed on the 'Data' tab
+ * 
+ * CONNECTING DRIVER AND PARENT
+ * 1. Load the app on two different devices
+ * 2. Go to the 'Connect' tab on both devices
+ * 3. Have the Driver click on "Set as Driver" and the Parent click "Set as Parent"
+ * 4. The Driver will then scan the Parents QR code
+ * 
+ * UPDATING SETTINGS
+ * 1. In the 'Connect' tab, click 'Set as Parent' to ensure you are on a parent device
+ * 2. Go to the 'Settings' tab
+ * 3. If a PIN has already been set, enter the proper PIN
+ * 4. Update 'User Info' and 'Reporting Limits'
+ * 5. When you exit each field, the settings will be updated and sent to the cloud.
+ * 6. Settings must be updated before Driver starts a trip.
+*/
 
 //Open the tabgroup
 $.index.open();
