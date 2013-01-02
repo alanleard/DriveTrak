@@ -373,7 +373,7 @@ function Controller() {
     scanCode ? $.__views.displayBtn.on("click", scanCode) : __defers["$.__views.displayBtn!click!scanCode"] = !0;
     $.__views.__alloyId2 = A$(Ti.UI.createTab({
         window: $.__views.win2,
-        title: "Connection",
+        title: "Connect",
         icon: "connectIcon.png",
         id: "__alloyId2"
     }), "Tab", null);
