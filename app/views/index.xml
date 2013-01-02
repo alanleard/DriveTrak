@@ -10,7 +10,7 @@
 				<Button id="connectBtn" onClick="vehicleConnect">connect to vehicle</Button>
 			</Window>
 		</Tab>
-		<Tab title="Connection" icon="connectIcon.png">
+		<Tab title="Connect" icon="connectIcon.png">
 			<Window id="win2" title="User Connection">
 				<Button id="qrcodeBtn" onClick="displayReference" top="20">Set as Parent</Button>
 				<Button id="displayBtn" onClick="scanCode" top="20">Set as Driver</Button>
