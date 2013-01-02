@@ -1,18 +1,44 @@
-Welcome to your Appcelerator Titanium Mobile Project
+Drive Trak is an for parents or resposible parties to ensure that their drivers are drving safely and resposibily.  Using a Denso CAN Wifi Unit to connect with the vehicle, drivers actions are tracked and reported realtime with the option for parents to receive push notifications when their driver exceeds a predefined limit.
 
-This is a blank project.  Start by editing your application's app.js to 
-make your first mobile project using Titanium.
+***Setting Limits***
+-How fast is the vehicle going
+-How hard is the throttle depressed
+-How high are the engine RPMs
+-How heavy is the acceleration
 
+*Future enhancements include:
+-Location bounding to ensure the driver is within a certain area
+-Lights on or off during the eveing
+-Engine temperature gage
+-Door's looked or unlocked while driving
 
+***Getting the Info***
+-Receive realtime push notifications to your phone when any of the limits are exceeded
+-Receive an email report immdiately after the driver puts the car in park
+-Link two devices as Driver and Parent with a simple 'click and scan' process using QR code technology
 
-----------------------------------
-Stuff our legal folk make us say:
-
-Appcelerator, Appcelerator Titanium and associated marks and logos are 
-trademarks of Appcelerator, Inc. 
-
-Titanium is Copyright (c) 2008-2012 by Appcelerator, Inc. All Rights Reserved.
-
-Titanium is licensed under the Apache Public License (Version 2). Please
-see the LICENSE file for the full license.
+/*INSTRUCTIONS TO USE THIS APP
+ *
+ * BASIC INFO TRACKING
+ * 1. Start your Denso Vehicle simulator and click 'listen'
+ * 2. Click the 'connect to vehicle' button
+ * 3. Go to the Denso simulator and change gears out of 'Park'
+ * 4. Once the car is out of 'Park' tracking will start
+ * 5. Tracking will end when the car is put back into 'Park'
+ * 6. A report will be generated and maximums will be displayed on the 'Data' tab
+ * 
+ * CONNECTING DRIVER AND PARENT
+ * 1. Load the app on two different devices
+ * 2. Go to the 'Connect' tab on both devices
+ * 3. Have the Driver click on "Set as Driver" and the Parent click "Set as Parent"
+ * 4. The Driver will then scan the Parents QR code
+ * 
+ * UPDATING SETTINGS
+ * 1. In the 'Connect' tab, click 'Set as Parent' to ensure you are on a parent device
+ * 2. Go to the 'Settings' tab
+ * 3. If a PIN has already been set, enter the proper PIN
+ * 4. Update 'User Info' and 'Reporting Limits'
+ * 5. When you exit each field, the settings will be updated and sent to the cloud.
+ * 6. Settings must be updated before Driver starts a trip.
+*/
 
