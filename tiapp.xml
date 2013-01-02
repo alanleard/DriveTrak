@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ti:app xmlns:ti="http://ti.appcelerator.org">
+    <property name="acs-oauth-secret-production" type="string">DjtrpsFOwGPsryuafuea7nJOTEuOGI3b</property>
+    <property name="acs-oauth-key-production" type="string">rmugLiUTmoeZPG1zsDsQlsYN0pFAzjVY</property>
+    <property name="acs-api-key-production" type="string">N9zqWXnUfoN4a7ejU2duAUmZ3zehiRs3</property>
+    <property name="acs-oauth-secret-development" type="string">2xXS6eIvHpQ6Ufa5Bwi63LMKL7CFVXVu</property>
+    <property name="acs-oauth-key-development" type="string">kXPqKBMxyDB6bXGBwECctMosTb0SOhXZ</property>
+    <property name="acs-api-key-development" type="string">I30RjRHImxiUK2ZJlZugstALEHTw8PKf</property>
+    <deployment-targets>
+        <target device="mobileweb">true</target>
+        <target device="iphone">true</target>
+        <target device="ipad">true</target>
+        <target device="android">true</target>
+        <target device="blackberry">false</target>
+    </deployment-targets>
+    <sdk-version>2.1.4.GA</sdk-version>
+    <id>com.drivetrack.app</id>
+    <name>Drive Trak</name>
+    <version>1.0</version>
+    <publisher>alanleard</publisher>
+    <url>http://appcelerator.com</url>
+    <description>not specified</description>
+    <copyright>2012 by alanleard</copyright>
+    <icon>appicon.png</icon>
+    <persistent-wifi>false</persistent-wifi>
+    <prerendered-icon>false</prerendered-icon>
+    <statusbar-style>default</statusbar-style>
+    <statusbar-hidden>false</statusbar-hidden>
+    <fullscreen>false</fullscreen>
+    <navbar-hidden>false</navbar-hidden>
+    <analytics>true</analytics>
+    <guid>0cfcb05f-15f5-4d9d-8f41-8c5f89dd5076</guid>
+    <property name="ti.ui.defaultunit">system</property>
+    <iphone>
+        <orientations device="iphone">
+            <orientation>Ti.UI.PORTRAIT</orientation>
+        </orientations>
+        <orientations device="ipad">
+            <orientation>Ti.UI.PORTRAIT</orientation>
+            <orientation>Ti.UI.UPSIDE_PORTRAIT</orientation>
+            <orientation>Ti.UI.LANDSCAPE_LEFT</orientation>
+            <orientation>Ti.UI.LANDSCAPE_RIGHT</orientation>
+        </orientations>
+    </iphone>
+    <android xmlns:android="http://schemas.android.com/apk/res/android"/>
+    <mobileweb>
+        <precache/>
+        <splash>
+            <enabled>true</enabled>
+            <inline-css-images>true</inline-css-images>
+        </splash>
+        <theme>default</theme>
+    </mobileweb>
+    <modules>
+        <module platform="commonjs" version="2.3.0">ti.cloud</module>
+        <module platform="android" version="1.0">ti.physicalSizeCategory</module>
+        <module platform="android" version="2.3.2">ti.barcode</module>
+        <module platform="iphone" version="1.8.1">ti.barcode</module>
+        <module platform="iphone" version="1.1">jp.co.denso.vehiclemodule</module>
+    </modules>
+    <plugins>
+        <plugin version="1.0">ti.alloy</plugin>
+    </plugins>
+</ti:app>

@@ -1,0 +1,36 @@
+"Window": {
+	layout: 'vertical',
+	backgroundColor:'#000000',
+	backgroundImage:'background.png',
+	barColor:'#A62D00'
+},
+"Label": {
+	width: Ti.UI.SIZE,
+	height: Ti.UI.SIZE,
+	color: "#ffffff",
+	font: {
+		fontSize: 16,
+		fontFamily: 'Helvetica Neue'
+	},
+	textAlign: 'center',
+	top:15
+},
+"Button": {
+	width:"50%",
+	height:40,
+	top:20,
+	backgroundImage:'button.png',
+	color:'#ffffff'
+},
+"TextField":{
+	width:"70%",
+	height:30,
+	borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+	top:5,
+	bottom:5,
+	clearOnEdit:true,
+	clearButtonMode:Ti.UI.INPUT_BUTTONMODE_ONFOCUS
+},
+"ScrollView":{
+	layout:'vertical'
+}

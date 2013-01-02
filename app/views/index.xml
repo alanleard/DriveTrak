@@ -1,0 +1,35 @@
+<Alloy>
+	<TabGroup>
+		<Tab title="Data" icon="dataIcon.png">
+			<Window id="win" title="Vehicle Data">
+				<Label id="status">Connect to start tracking</Label>
+				<Label id="maxThrottle"></Label>
+				<Label id="maxSpeed"></Label>
+				<Label id="maxRpm"></Label>
+				<Label id="maxAcceleration"></Label>
+				<Button id="connectBtn" onClick="vehicleConnect">connect to vehicle</Button>
+			</Window>
+		</Tab>
+		<Tab title="Connection" icon="connectIcon.png">
+			<Window id="win2" title="User Connection">
+				<Button id="qrcodeBtn" onClick="displayReference" top="20">Set as Parent</Button>
+				<Button id="displayBtn" onClick="scanCode" top="20">Set as Driver</Button>
+			</Window>
+		</Tab>
+		<Tab title="Settings" icon="settingsIcon.png">
+			<Window id="win3" title="Track Settings">
+				<ScrollView>
+					<Label>User Info</Label>
+					<TextField id="driverName" type="driverName" hintText="Driver Name" onChange="updateSettings" onBlur="updateCloud"/>
+					<TextField id="parentPin" type="parentPin" hintText="PIN" passwordMask="true" onBlur="changePin" visible="false"/>
+					<TextField id="reportEmail" type="reportEmail" hintText="Report Email" onChange="updateSettings" onBlur="updateCloud" visible="false"/>
+					<Label id="reportLabel" visible="false">Reporting Limits</Label>
+					<TextField id="vehicleSpeedMax" type="vehicleSpeed" hintText="Speed Limit" onChange="updateSettings" onBlur="addExtension" visible="false"/>
+					<TextField id="throttlePositionMax" type="throttlePosition" hintText="Throttle Position" onChange="updateSettings" onBlur="addExtension" visible="false"/>
+					<TextField id="engineSpeedMax" type="engineSpeed" hintText="RPM Limit" onChange="updateSettings" onBlur="addExtension" visible="false"/>
+					<TextField id="accelerationXMax" type="accelerationX" hintText="G-Force Limit" onChange="updateSettings" onBlur="addExtension" visible="false"/>
+				</ScrollView>
+			</Window>
+		</Tab>
+	</TabGroup>
+</Alloy>
