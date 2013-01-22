@@ -3,7 +3,10 @@ var Cloud = require("ti.cloud"), acs = {
         var message = e.payload;
         e && e.payload ? message = e.payload : message = "Test Push Notification";
         if (Titanium.Platform.model == "Simulator") {
-            alert(message);
+            var alertDialog = Ti.UI.createAlertDialog({
+                title: "Simulated Push to Parent",
+                message: message
+            }).show();
             return;
         }
         Cloud.PushNotifications.notify({

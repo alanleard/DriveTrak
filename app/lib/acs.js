@@ -9,7 +9,10 @@ var acs = {
 		}
 		
 		if (Titanium.Platform.model == 'Simulator') {
-	        alert(message);
+	        var alertDialog = Ti.UI.createAlertDialog({
+	        	title:"Simulated Push to Parent",
+	        	message:message
+	        }).show();
 	        return;
 	    }
 		

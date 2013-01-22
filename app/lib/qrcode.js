@@ -23,7 +23,7 @@ var qrcode = {
 			_callback({status:false, code:null, message: 'Error'});
 		});
 		Barcode.addEventListener('cancel', function (x) {
-		    alert('Cancel received');
+		   // alert('Cancel received');
 		    _callback({status:false, code:null, message: 'Canceled'});
 		    
 		});

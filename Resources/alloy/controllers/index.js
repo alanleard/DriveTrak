@@ -75,10 +75,6 @@ function Controller() {
                 type: "out",
                 value: settings[e.type].max
             });
-            currentMax = conversion[e.type]({
-                type: "out",
-                value: track[e.type].current
-            });
         }
         if (vData > track[e.type].max || track[e.type].max == 0) {
             track[e.type].max = vData;
@@ -176,7 +172,7 @@ function Controller() {
         report += data.title + ": " + data.detail + " (Time: " + time + ")<br>";
     }
     function finalizeReport(endTime) {
-        report += "</p><p>End Time: " + endTime + "<br><br>Max Speed: " + track.vehicleSpeed.max + "<br>Max RPMs: " + track.engineSpeed.max + "<br>Max Acceleration: " + track.accelerationX.max + "<br>Max Throttle: " + track.throttlePosition.max + "<br></p>";
+        report += "</p><p>End Time: " + endTime + "<br><br>Max Speed: " + track.vehicleSpeed.max + settings.vehicleSpeed.extension + "<br>Max RPMs: " + track.engineSpeed.max + settings.engineSpeed.extension + "<br>Max Acceleration: " + track.accelerationX.max + settings.accelerationX.extension + "<br>Max Throttle: " + track.throttlePosition.max + settings.throttlePosition.extension + "<br></p>";
         track.vehicleSpeed.max = 0;
         track.engineSpeed.max = 0;
         track.accelerationX.max = 0;

@@ -245,7 +245,7 @@ function vehicleBehaviorTrack(e){
 	if(settings[e.type].conversion){
 		vData = conversion[e.type]({type:"out",value:e.data});
 		settingMax = conversion[e.type]({type:"out", value: settings[e.type].max});
-		currentMax = conversion[e.type]({type:"out", value: track[e.type].current});
+		//currentMax = conversion[e.type]({type:"out", value: track[e.type].current});
 	}
 	
 	//If the data is greater then the current max, record it
@@ -422,7 +422,7 @@ function appendReport(data){
 
 //Finalize the email report and rest maximums
 function finalizeReport(endTime){
-	report += "</p><p>End Time: "+endTime+"<br><br>Max Speed: "+track.vehicleSpeed.max+"<br>Max RPMs: "+track.engineSpeed.max+"<br>Max Acceleration: "+track.accelerationX.max+"<br>Max Throttle: "+track.throttlePosition.max+"<br></p>"
+	report += "</p><p>End Time: "+endTime+"<br><br>Max Speed: "+track.vehicleSpeed.max+settings.vehicleSpeed.extension+"<br>Max RPMs: "+track.engineSpeed.max+settings.engineSpeed.extension+"<br>Max Acceleration: "+track.accelerationX.max+settings.accelerationX.extension+"<br>Max Throttle: "+track.throttlePosition.max+settings.throttlePosition.extension+"<br></p>"
 	track.vehicleSpeed.max = 0;
 	track.engineSpeed.max = 0;
 	track.accelerationX.max = 0;

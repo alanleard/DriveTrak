@@ -22,7 +22,6 @@ var Barcode = require("ti.barcode"), qrcode = {
                 });
             });
             Barcode.addEventListener("cancel", function(x) {
-                alert("Cancel received");
                 _callback({
                     status: !1,
                     code: null,
